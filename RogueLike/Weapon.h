@@ -1,5 +1,4 @@
 #pragma once
-#include "Item.h"
 
 enum WeaponType
 {
@@ -10,7 +9,7 @@ enum WeaponType
 	DAGGER
 };
 
-class Weapon : public Item
+class Weapon
 {
 protected:
 

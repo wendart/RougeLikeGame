@@ -5,6 +5,6 @@
 
 class Equipment
 {
-	std::vector <Item> Eq;
-	std::vector <Weapon> Weapons;
+	std::vector <Weapon*> Weapons;
+	std::vector <Item*> Weapons;
 };
