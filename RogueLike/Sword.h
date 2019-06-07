@@ -12,6 +12,5 @@ enum SWORD
 
 class Sword : public Weapon
 {
-
-
+	int DealDamage();
 };

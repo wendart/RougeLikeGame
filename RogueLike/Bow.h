@@ -13,6 +13,5 @@ enum BOW
 
 class Bow : public Weapon
 {
-
-
+	int DealDamage();
 };

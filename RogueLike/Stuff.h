@@ -12,6 +12,6 @@ enum STAFF
 
 class Staff : public Weapon
 {
-
+	int DealDamage();
 
 };

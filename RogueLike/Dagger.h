@@ -12,6 +12,5 @@ enum DAGGER
 
 class Dagger : public Weapon
 {
-
-
+	int DealDamage();
 };

@@ -124,8 +124,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Axe.cpp" />
+    <ClCompile Include="Bow.cpp" />
     <ClCompile Include="Console.cpp" />
-    <ClCompile Include="Źródło.cpp" />
+    <ClCompile Include="Dagger.cpp" />
+    <ClCompile Include="Stuff.cpp" />
+    <ClCompile Include="Sword.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Axe.h" />
@@ -139,7 +142,7 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Potion.h" />
-    <ClInclude Include="Staff.h" />
+    <ClInclude Include="Stuff.h" />
     <ClInclude Include="Sword.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="Warrior.h" />
