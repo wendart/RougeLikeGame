@@ -1,11 +1,12 @@
 #include <iostream>
-#include "Console.h"
+#include "Engine.h"
 
 int main()
 {
-	Console c1;
-	c1.print_menu();
-	
-	std::cout << c1.PromptForMenuDecision() << std::endl;
-	std::cout << c1.PromptForName();
+	Engine Game;
+
+	Game.PrepareGame();
+
+	system("pause");
+	return 0;
 }

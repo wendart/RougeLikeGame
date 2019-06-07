@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <iostream>
 #include "Equipment.h"
 
 class Player
@@ -15,10 +16,11 @@ protected:
 
 public:
 	Player();
-	virtual void LevelUp();
-	std::string ChoosePath();
-	std::string MakeDecision();
-	virtual int Attac();
+	std::string GetName();
+	//virtual void LevelUp() = 0;
+	//std::string ChoosePath();
+	//std::string MakeDecision();
+	//virtual int Attac() = 0;
 
 
 };

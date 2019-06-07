@@ -2,16 +2,17 @@
 #include "Player.h"
 #include <string>
 
-class Mage : public Player
+class Hunter : public Player
 {
 private:
-	void HunterPerksUpdate();
+	//void HunterPerksUpdate();
 
 protected:
 
 public:
-	virtual void LevelUp();
-	virtual int Attac();
+	Hunter(std::string name);
+	//virtual void LevelUp();
+	//virtual int Attac();
 
 
 };

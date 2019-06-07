@@ -40,7 +40,8 @@ std::string Console::PromptForMenuDecision()
 	std::string input;
 	do
 	{
-		prompt("", &input);
+		std::getline(std::cin, input);
+		//prompt("", &input);
 	} while (input != "Warrior" && input != "Mage" && input != "Hunter" && input != "exit");
 
 	return input;

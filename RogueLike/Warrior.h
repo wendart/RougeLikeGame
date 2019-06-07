@@ -5,13 +5,14 @@
 class Warrior : public Player
 {
 private:
-	void WarriorPerksUpdate();
+	//void WarriorPerksUpdate();
 
 protected:
 
 public:
-	virtual void LevelUp();
-	virtual int Attac();
+	Warrior(std::string name);
+	//virtual void LevelUp();
+	//virtual int Attac();
 
 
 };

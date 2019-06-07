@@ -5,13 +5,14 @@
 class Mage : public Player
 {
 private:
-	void MagePerksUpdate();
+	//void MagePerksUpdate();
 
 protected:
 
 public:
-	virtual void LevelUp();
-	virtual int Attac();
+	Mage(std::string name);
+	//virtual void LevelUp();
+	//virtual int Attac();
 
 
 };

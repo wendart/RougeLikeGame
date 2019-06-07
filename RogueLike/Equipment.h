@@ -1,10 +1,10 @@
 #pragma once
 #include <vector>
-#include "Item.h"
 #include "Weapon.h"
+#include "Potion.h"
 
 class Equipment
 {
 	std::vector <Weapon*> Weapons;
-	std::vector <Item*> Weapons;
+	std::vector <Potion*> Potions;
 };
