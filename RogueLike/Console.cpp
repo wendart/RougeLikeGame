@@ -1,7 +1,7 @@
 #include "Console.h"
 
 
-void Console::prompt(std::string msg, std::string* var)
+void Console::Prompt(std::string msg, std::string* var)
 {
 	std::cout << msg;
 	std::getline(std::cin, *var);
@@ -14,7 +14,7 @@ bool Console::PromptForBool(std::string messege)
 
 		do
 		{
-			prompt(messege, &input);
+			Prompt(messege, &input);
 		} while (input != "yes" && input != "no");
 
 		if (input == "yes")
@@ -28,11 +28,18 @@ bool Console::PromptForBool(std::string messege)
 	}
 }
 
-void Console::print_menu()
+void Console::PrintMenu()
 {
 	std::cout << "Totally innovative RogueLike game" << std::endl << std::endl << "You can choose from three classes: " << std::endl
 		<< "Warrior" << std::endl << "Mage" << std::endl << "Hunter" << std::endl << std::endl << std::endl;
 	std::cout << "To choose class and start game just type class archetype or exit if you don't want to play: " << std::endl;
+}
+
+void Console::PrintLore()
+{
+	std::cout << "You are walking into the dark pit in the middle of nowhere, to find cursed totem of ancient tribe" <<
+		"At the moment you came in entry just collapsed. Your only chance to escape it to find this totem." <<
+		"Full of fear and a ittle excited you enter the darkness" << std::endl;
 }
 
 std::string Console::PromptForMenuDecision()
@@ -52,7 +59,30 @@ std::string Console::PromptForName()
 	std::string input;
 	do
 	{
-		prompt("", &input);
+		Prompt("", &input);
 	} while (input.length() > 15);
 	return std::string();
+}
+
+/*
+std::string Console::PromptForDirection()
+{
+	std::string input;
+	do
+	{
+		Prompt("", &input);
+	} while (input != "left" && input != "right" && input != "straight");
+
+	return input;
+}
+*/
+
+void Console::PromptForDirection(std::string mess)
+{
+	std::string input;
+	do
+	{
+		Prompt(mess, &input);
+	} while (input != "left" && input != "right" && input != "straight");
+	
 }

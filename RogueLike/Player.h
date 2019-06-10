@@ -17,6 +17,7 @@ protected:
 public:
 	Player();
 	std::string GetName();
+	void InventoryManagement();
 	//virtual void LevelUp() = 0;
 	//std::string ChoosePath();
 	//std::string MakeDecision();

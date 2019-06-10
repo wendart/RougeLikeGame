@@ -7,8 +7,11 @@ class Console
 public:
 
 	bool PromptForBool(std::string messege);
-	void prompt(std::string msg, std::string* var);
-	void print_menu();
+	void Prompt(std::string msg, std::string* var);
+	void PrintMenu();
+	void PrintLore();
 	std::string PromptForMenuDecision();
 	std::string PromptForName();
+	//std::string PromptForDirection();
+	void PromptForDirection(std::string mess);
 };
