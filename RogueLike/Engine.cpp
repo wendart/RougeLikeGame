@@ -2,13 +2,6 @@
 
 void Engine::PrepareGame()
 {
-	/*
-	std::string decision;
-	Console* c1 = new Console();
-	ItemGenerator* generator = new ItemGenerator();
-	FileWriter* writter = new FileWriter();
-	Rand* random = new Rand();
-	*/
 
 	this->console->PrintMenu();
 	decision = console->PromptForMenuDecision();
@@ -48,7 +41,7 @@ void Engine::Game(Player* p1)
 	{
 		//console->PrintPlayerStatus(p1);
 		//console->PromptForDirection("Which way do you want to go \nright \nstraight \nleft\n");
-		if (random->MonsterAppearnce() < 90)
+		if (RANDOM.Random100() < 90)
 		{
 			std::cout << "Fight" << std::endl;
 			this->MonsterFight(p1);
@@ -68,7 +61,7 @@ void Engine::Game(Player* p1)
 void Engine::MonsterFight(Player* p1)
 {
 	int i = 1;
-	Monster* enemy = new Monster(random, p1->GetLevel());
+	Monster* enemy = new Monster(p1->GetLevel());
 	do
 	{
 		enemy->SetHP(enemy->GetHP() - p1->Attac());

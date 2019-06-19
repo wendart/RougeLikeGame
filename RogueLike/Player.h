@@ -2,6 +2,12 @@
 #include <string>
 #include <iostream>
 #include "Equipment.h"
+#include "Weapon.h"
+#include "Stuff.h"
+#include "Dagger.h"
+#include "Sword.h"
+#include "Bow.h"
+#include "Axe.h"
 
 class Player
 {
@@ -10,9 +16,10 @@ protected:
 	int HealthPoints;
 	int Damage;
 	int Armour;
-	int Level;
+	int Level = 1;
 	int EvasionChance;
-	Equipment eq;
+	Equipment* eq;
+	Weapon* weapon;
 
 public:
 	Player();

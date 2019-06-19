@@ -1,6 +1,8 @@
 #include "Rand.h"
 
-int Rand::MonsterAppearnce()
+Rand RANDOM;
+
+int Rand::Random100()
 {
 	if (!this->ininitialized)
 	{
@@ -33,4 +35,15 @@ int Rand::MonsterLevel(int lvl)
 	int a = ((rand() % 6) - 3);
 
 	return lvl + a;
+}
+
+int Rand::BasicDamage(int min, int max)
+{
+	if (!this->ininitialized)
+	{
+		srand(time(NULL));
+		this->ininitialized = true;
+	}
+	int a = (max - min) + 1;
+	return ((rand() % a) + min);
 }

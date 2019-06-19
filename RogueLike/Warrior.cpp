@@ -6,7 +6,7 @@ Warrior::Warrior(std::string name)
 	Armour = 10;
 	Damage = 1;
 	HealthPoints = 40;
-	std::cout << "utworzono warriora";
+	weapon = new Dagger(1,3);
 }
 
 void Warrior::LevelUp()
@@ -22,7 +22,7 @@ void Warrior::LevelUp()
 
 int Warrior::Attac()
 {
-	return this->Damage + 8;
+	return this->Damage + 8 + weapon->DealDamage();
 }
 
 std::string Warrior::GetName()

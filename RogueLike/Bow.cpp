@@ -1,6 +1,13 @@
 #include "Bow.h"
 
+Bow::Bow(int min, int max)
+{
+	Type = BOW;
+	DamageMax = max;
+	DamageMin = min;
+}
+
 int Bow::DealDamage()
 {
-	return 3;
+	return RANDOM.BasicDamage(DamageMin,DamageMax);
 }

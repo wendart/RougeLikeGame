@@ -5,7 +5,7 @@ Mage::Mage(std::string name)
 	Name = name;
 	Damage = 3;
 	HealthPoints = 20;
-	std::cout << "utworzono maga";
+	weapon = new Dagger(1, 2);
 }
 
 void Mage::LevelUp()
@@ -21,7 +21,7 @@ void Mage::LevelUp()
 
 int Mage::Attac()
 {
-	return this->Damage + 10;
+	return this->Damage + 10 + weapon->DealDamage();
 }
 
 std::string Mage::GetName()

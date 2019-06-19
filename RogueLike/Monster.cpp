@@ -1,11 +1,11 @@
 #include "Monster.h"
 
-Monster::Monster(Rand* r, int lvl) :
-	Type(MONSTER(r->MonsterType())), Level(r->MonsterLevel(lvl))
+Monster::Monster(int lvl) :
+	Type(MONSTER(RANDOM.MonsterType())), Level(RANDOM.MonsterLevel(lvl))
 {
 	this->Armour = this->Level + 1;
 	this->Health = this->Level + 20;
-	this->Damage = this->Level;
+	this->Damage = (this->Level*3);
 }
 
 int Monster::Attack()

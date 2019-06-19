@@ -31,7 +31,7 @@ class Monster
 
 public:
 
-	Monster(Rand* r, int lvl);
+	Monster(int lvl);
 	int Attack();
 	int GetLevel();
 	int GetHP();

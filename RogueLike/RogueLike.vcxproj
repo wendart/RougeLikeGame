@@ -137,6 +137,7 @@
     <ClCompile Include="Stuff.cpp" />
     <ClCompile Include="Sword.cpp" />
     <ClCompile Include="Warrior.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Axe.h" />

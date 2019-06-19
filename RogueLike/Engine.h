@@ -18,7 +18,6 @@ private:
 	Console* console = new Console();
 	ItemGenerator* generator = new ItemGenerator();
 	FileWriter* writter = new FileWriter();
-	Rand* random = new Rand();
 
 public:
 	void PrepareGame();

@@ -1,4 +1,5 @@
 #pragma once
+#include "Rand.h"
 
 enum WeaponType
 {
@@ -12,13 +13,12 @@ enum WeaponType
 class Weapon
 {
 protected:
+	WeaponType Type;
+	int DamageMin = 0;
+	int DamageMax = 0;
 
-	int DamageMin;
-	int DamageMax;
-	int Durabilitty;
-
-	virtual int DealDamage() = 0;
 
 public:
-	virtual WeaponType getWeaponType() = 0;
+	WeaponType getWeaponType();
+	virtual int DealDamage() = 0;
 };

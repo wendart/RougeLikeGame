@@ -7,7 +7,7 @@ Hunter::Hunter(std::string name)
 	Armour = 0;
 	Damage = 2;
 	HealthPoints = 30;
-	std::cout << "utworzono huntera";
+	weapon = new Dagger(2, 4);
 }
 
 void Hunter::LevelUp()
@@ -23,7 +23,7 @@ void Hunter::LevelUp()
 
 int Hunter::Attac()
 {
-	return this->Damage + 9;
+	return this->Damage + 9 + weapon->DealDamage();
 }
 
 std::string Hunter::GetName()

@@ -1,16 +1,10 @@
 #pragma once
 #include "Weapon.h"
 
-enum DAGGER
-{
-	Quicksilver,
-	SilentHysteria,
-	SmallBlade,
-	KitchenKnife,
-	RageSpike,
-};
-
 class Dagger : public Weapon
 {
-	int DealDamage();
+public:
+
+	Dagger(int min, int max);
+	virtual int DealDamage();
 };

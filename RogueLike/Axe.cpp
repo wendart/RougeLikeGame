@@ -1,13 +1,21 @@
 #include "Axe.h"
 
+Axe::Axe(int min, int max)
+{
+	Type = AXE;
+	DamageMax = max;
+	DamageMin = min;
+}
+
 int Axe::DealDamage()
 {
-	/*int dmg;
-	dmg = rand(DamageMax, DamageMin);
-	if (dmg == DamageMax)
+	if (RANDOM.Random100() < 9)
 	{
-		dmg = dmg * 1.2;
+		return (RANDOM.BasicDamage(DamageMin, DamageMax) + DamageMax);
 	}
-	return dmg;*/
-	return 5;
+	else
+	{
+		return RANDOM.BasicDamage(DamageMin, DamageMax);
+	}
+	
 }
