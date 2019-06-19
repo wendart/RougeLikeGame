@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+#include "Rand.h"
 
 enum MONSTER
 {
@@ -21,10 +23,17 @@ enum MONSTER
 
 class Monster
 {
+	MONSTER Type;
 	int Damage;
 	int Health;
 	int Armour;
+	int Level;
 
-	Monster();
+public:
+
+	Monster(Rand* r, int lvl);
 	int Attack();
+	int GetLevel();
+	int GetHP();
+	void SetHP(int _HP);
 };

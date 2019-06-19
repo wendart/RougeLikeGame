@@ -10,4 +10,6 @@ private:
 
 public:
 	int MonsterAppearnce();
+	int MonsterType();
+	int MonsterLevel(int lvl);
 };

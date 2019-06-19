@@ -7,14 +7,22 @@
 #include "ItemGenerator.h"
 #include "Rand.h"
 #include "FileWritter.h"
+#include "Monster.h"
 
 
 class Engine
 {
 private:
 	bool CURSED_TOTEM = false;
+	std::string decision;
+	Console* console = new Console();
+	ItemGenerator* generator = new ItemGenerator();
+	FileWriter* writter = new FileWriter();
+	Rand* random = new Rand();
+
 public:
 	void PrepareGame();
-	void Game(Player p1, Console c1, ItemGenerator generator, FileWriter writter, Rand random);
+	virtual void Game(Player* p1);
+	void MonsterFight(Player* p1);
 
 };
