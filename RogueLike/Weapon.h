@@ -1,5 +1,6 @@
 #pragma once
 #include "Rand.h"
+#include <iostream>
 
 enum WeaponType
 {
@@ -20,5 +21,7 @@ protected:
 
 public:
 	WeaponType getWeaponType();
+	void PrintWeaponInfo();
 	virtual int DealDamage() = 0;
+	~Weapon();
 };

@@ -13,6 +13,17 @@ int Rand::Random100()
 	return (rand() % 100) + 1;
 }
 
+int Rand::WeaponRoll()
+{
+	if (!this->ininitialized)
+	{
+		srand(time(NULL));
+		this->ininitialized = true;
+	}
+
+	return (rand() % 6);
+}
+
 int Rand::MonsterType()
 {
 	if (!this->ininitialized)

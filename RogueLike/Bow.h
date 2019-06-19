@@ -3,6 +3,8 @@
 
 class Bow : public Weapon
 {
+public:
+
 	Bow(int min, int max);
 	int DealDamage();
 };

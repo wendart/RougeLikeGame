@@ -75,8 +75,20 @@ void Engine::MonsterFight(Player* p1)
 		if (enemy->GetHP() <= 0)
 		{
 			p1->LevelUp();
-		}
+			Weapon* loot = generator->GenerateWeapon(p1->GetLevel());
+			std::cout << "Monster dropped: ";
+			loot->PrintWeaponInfo();
+			bool decision = console->PromptForBool("Do you want to keep this? ");
+			if (decision = true)
+			{
+				p1->Weapons.push_back(loot);
+			}
+			else
+			{
 
+			}
+		}
+		
 
 		system("pause");
 		system("cls");

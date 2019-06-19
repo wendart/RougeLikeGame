@@ -1,13 +1,14 @@
 #pragma once
 #include <string>
 #include <iostream>
-#include "Equipment.h"
+#include <vector>
 #include "Weapon.h"
 #include "Stuff.h"
 #include "Dagger.h"
 #include "Sword.h"
 #include "Bow.h"
 #include "Axe.h"
+#include "Potion.h"
 
 class Player
 {
@@ -18,7 +19,6 @@ protected:
 	int Armour;
 	int Level = 1;
 	int EvasionChance;
-	Equipment* eq;
 	Weapon* weapon;
 
 public:
@@ -29,9 +29,10 @@ public:
 	int GetLevel();
 	void SetHealth(int _HP);
 	virtual void LevelUp() = 0;
-	//std::string ChoosePath();
-	//std::string MakeDecision();
 	virtual int Attac() = 0;
+
+	std::vector <Weapon*> Weapons;
+	std::vector <Potion*> Potions;
 
 
 };

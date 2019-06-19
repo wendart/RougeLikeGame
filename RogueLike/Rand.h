@@ -12,6 +12,7 @@ private:
 
 public:
 	int Random100();
+	int WeaponRoll();
 	int MonsterType();
 	int MonsterLevel(int lvl);
 	int BasicDamage(int min, int max);

@@ -129,6 +129,7 @@
     <ClCompile Include="Dagger.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Hunter.cpp" />
+    <ClCompile Include="ItemGenerator.cpp" />
     <ClCompile Include="Mage.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Monster.cpp" />
@@ -146,7 +147,6 @@
     <ClInclude Include="Console.h" />
     <ClInclude Include="Dagger.h" />
     <ClInclude Include="Engine.h" />
-    <ClInclude Include="Equipment.h" />
     <ClInclude Include="FileWritter.h" />
     <ClInclude Include="Hunter.h" />
     <ClInclude Include="ItemGenerator.h" />

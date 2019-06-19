@@ -2,7 +2,6 @@
 
 Player::Player()
 {
-	eq = new Equipment();
 }
 
 
