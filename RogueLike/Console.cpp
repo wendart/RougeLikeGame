@@ -44,7 +44,20 @@ void Console::PrintLore()
 
 void Console::PrintPlayerStatus(Player* player)
 {
-	std::cout << player->GetName() << std::endl << "Level: " << player->GetLevel() << std::endl << "HP: " << player->GetHealth() << std::endl << std::endl;
+	std::cout << player->GetName() << std::endl << "Level: " << player->GetLevel() << std::endl << "HP: " << player->GetHealth() << std::endl;
+	player->GetWeapon()->PrintWeaponInfo();
+	std::cout << std::endl << std::endl;
+}
+
+int Console::PromptForInventoryPlace(int place)
+{
+	int input;
+	do
+	{
+		std::cin >> input;
+	} while (input > place || input < 0);
+
+	return input-1;
 }
 
 std::string Console::PromptForMenuDecision()

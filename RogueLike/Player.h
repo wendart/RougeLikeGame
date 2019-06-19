@@ -24,12 +24,14 @@ protected:
 public:
 	Player();
 	virtual std::string GetName() = 0;
-	void InventoryManagement();
+	void WeaponChange(bool change, int place);
+	void PrintInventory();
 	int GetHealth();
 	int GetLevel();
 	void SetHealth(int _HP);
 	virtual void LevelUp() = 0;
 	virtual int Attac() = 0;
+	Weapon* GetWeapon();
 
 	std::vector <Weapon*> Weapons;
 	std::vector <Potion*> Potions;

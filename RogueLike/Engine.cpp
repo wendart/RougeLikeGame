@@ -79,9 +79,21 @@ void Engine::MonsterFight(Player* p1)
 			std::cout << "Monster dropped: ";
 			loot->PrintWeaponInfo();
 			bool decision = console->PromptForBool("Do you want to keep this? ");
-			if (decision = true)
+			if (decision == true)
 			{
 				p1->Weapons.push_back(loot);
+			}
+			else
+			{
+				loot->~Weapon();
+			}
+
+
+			decision = console->PromptForBool("Do you want to change weapon? ");
+			if (decision == true)
+			{
+				p1->PrintInventory();
+				console->PromptForInventoryPlace(p1->Weapons.size());
 			}
 			else
 			{
