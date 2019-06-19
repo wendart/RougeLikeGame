@@ -11,10 +11,6 @@ Player::Player()
 	eq = e1;
 }
 
-std::string Player::GetName()
-{
-	return this->Name;
-}
 
 void Player::InventoryManagement()
 {

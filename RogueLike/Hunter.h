@@ -6,13 +6,13 @@ class Hunter : public Player
 {
 private:
 	//void HunterPerksUpdate();
-
 protected:
 
 public:
 	Hunter(std::string name);
-	//virtual void LevelUp();
+	virtual void LevelUp();
 	virtual int Attac();
+	virtual std::string GetName();
 
 
 };

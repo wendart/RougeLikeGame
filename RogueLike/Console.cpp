@@ -42,6 +42,11 @@ void Console::PrintLore()
 		"Full of fear and a ittle excited you enter the darkness" << std::endl;
 }
 
+void Console::PrintPlayerStatus(Player* player)
+{
+	std::cout << player->GetName() << std::endl << "Level: " << player->GetLevel() << std::endl << "HP: " << player->GetHealth() << std::endl << std::endl;
+}
+
 std::string Console::PromptForMenuDecision()
 {
 	std::string input;
@@ -60,7 +65,8 @@ std::string Console::PromptForName()
 	{
 		Prompt("", &input);
 	} while (input.length() > 15);
-	return std::string();
+	
+	return input;
 }
 
 /*

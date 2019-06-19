@@ -11,8 +11,9 @@ protected:
 
 public:
 	Mage(std::string name);
-	//virtual void LevelUp();
+	virtual void LevelUp();
 	virtual int Attac();
+	virtual std::string GetName();
 
 
 };

@@ -41,9 +41,13 @@ void Engine::Game(Player* p1)
 {
 	system("cls");
 	this->console->PrintLore();
+	system("pause");
+	system("cls");
+	console->PrintPlayerStatus(p1);
 	do
 	{
-		console->PromptForDirection("Which way do you want to go \nright \nstraight \nleft\n");
+		//console->PrintPlayerStatus(p1);
+		//console->PromptForDirection("Which way do you want to go \nright \nstraight \nleft\n");
 		if (random->MonsterAppearnce() < 90)
 		{
 			std::cout << "Fight" << std::endl;
@@ -54,6 +58,8 @@ void Engine::Game(Player* p1)
 			//p1.InventoryManagement();
 		}
 
+
+		if(p1->GetLevel() == 4)
 		CURSED_TOTEM = true;
 	} while (CURSED_TOTEM == false);
 
@@ -61,16 +67,28 @@ void Engine::Game(Player* p1)
 
 void Engine::MonsterFight(Player* p1)
 {
+	int i = 1;
 	Monster* enemy = new Monster(random, p1->GetLevel());
 	do
 	{
 		enemy->SetHP(enemy->GetHP() - p1->Attac());
-		std::cout << "You've just attacked monster dealing " << p1->Attac() << " damage. Monster health " << enemy->GetHP() << std::endl;
+		std::cout << "ROUND " << i << std::endl << "You've just attacked monster dealing " << p1->Attac() << " damage. Monster health " << enemy->GetHP() << std::endl;
 		if (enemy->GetHP() > 0)
 		{
 			p1->SetHealth(p1->GetHealth() - enemy->Attack());
-			std::cout << "You've just been attacked and taken " << enemy->Attack() << " damage. Your health " << p1->GetHealth() << std::endl;
+			std::cout << "ROUND " << i << std::endl << "You've just been attacked and taken " << enemy->Attack() << " damage. Your health " << p1->GetHealth() << std::endl;
+		}
+		
+		if (enemy->GetHP() <= 0)
+		{
+			p1->LevelUp();
 		}
 
-	} while (p1->GetHealth() >= 0 && enemy->GetHP() >= 0);
+
+		system("pause");
+		system("cls");
+		console->PrintPlayerStatus(p1);
+		i++;
+		
+	} while (p1->GetHealth() > 0 && enemy->GetHP() > 0);
 }

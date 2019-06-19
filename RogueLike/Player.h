@@ -16,12 +16,12 @@ protected:
 
 public:
 	Player();
-	std::string GetName();
+	virtual std::string GetName() = 0;
 	void InventoryManagement();
 	int GetHealth();
 	int GetLevel();
 	void SetHealth(int _HP);
-	//virtual void LevelUp() = 0;
+	virtual void LevelUp() = 0;
 	//std::string ChoosePath();
 	//std::string MakeDecision();
 	virtual int Attac() = 0;
