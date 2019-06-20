@@ -39,7 +39,6 @@ void Engine::Game(Player* p1)
 	console->PrintPlayerStatus(p1);
 	do
 	{
-		//console->PrintPlayerStatus(p1);
 		//console->PromptForDirection("Which way do you want to go \nright \nstraight \nleft\n");
 		if (RANDOM.Random100() < 90)
 		{
@@ -49,6 +48,13 @@ void Engine::Game(Player* p1)
 		else
 		{
 			//p1.InventoryManagement();
+		}
+
+		if (p1->GetLevel() % 4 == 0 && RANDOM.Random100() < 90)
+		{
+			p1->Potions.push_back(generator->GeneratePotion(p1->GetLevel()));
+			std::cout << "In dust you see a shiny object, as you grab it, it appears to be a HealthPotion" << std::endl;
+			p1->PrintPotions();
 		}
 
 
@@ -64,8 +70,8 @@ void Engine::MonsterFight(Player* p1)
 	Monster* enemy = new Monster(p1->GetLevel());
 	do
 	{
-		enemy->SetHP(enemy->GetHP() - p1->Attac());
-		std::cout << "ROUND " << i << std::endl << "You've just attacked monster dealing " << p1->Attac() << " damage. Monster health " << enemy->GetHP() << std::endl;
+		enemy->SetHP(enemy->GetHP() - p1->Attack());
+		std::cout << "ROUND " << i << std::endl << "You've just attacked monster dealing " << p1->Attack() << " damage. Monster health " << enemy->GetHP() << std::endl;
 		if (enemy->GetHP() > 0)
 		{
 			p1->SetHealth(p1->GetHealth() - enemy->Attack());
@@ -92,12 +98,21 @@ void Engine::MonsterFight(Player* p1)
 			decision = console->PromptForBool("Do you want to change weapon? ");
 			if (decision == true)
 			{
-				p1->PrintInventory();
+				p1->PrintWeapons();
 				p1->WeaponChange(console->PromptForInventoryPlace(p1->Weapons.size(), "Pick waepon you want from inventory (number) "));
 			}
 			else
 			{
-				p1->PrintInventory();
+				p1->PrintWeapons();
+			}
+
+			if (p1->Potions.empty() != true)
+			{
+				decision = console->PromptForBool("Do you want to drink potion?");
+					if (decision = true)
+					{
+						p1->PrintPotions();
+					}
 			}
 		}
 		

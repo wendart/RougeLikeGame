@@ -20,7 +20,7 @@ void Warrior::LevelUp()
 	Damage = Damage + 1;
 }
 
-int Warrior::Attac()
+int Warrior::Attack()
 {
 	return this->Damage + 8 + weapon->DealDamage();
 }

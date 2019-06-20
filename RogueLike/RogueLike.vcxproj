@@ -134,6 +134,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Potion.cpp" />
     <ClCompile Include="Rand.cpp" />
     <ClCompile Include="Stuff.cpp" />
     <ClCompile Include="Sword.cpp" />

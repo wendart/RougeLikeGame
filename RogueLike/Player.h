@@ -25,12 +25,13 @@ public:
 	Player();
 	virtual std::string GetName() = 0;
 	void WeaponChange(int place);
-	void PrintInventory();
+	void PrintWeapons();
+	void PrintPotions();
 	int GetHealth();
 	int GetLevel();
 	void SetHealth(int _HP);
 	virtual void LevelUp() = 0;
-	virtual int Attac() = 0;
+	virtual int Attack() = 0;
 	Weapon* GetWeapon();
 
 	std::vector <Weapon*> Weapons;

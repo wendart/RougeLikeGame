@@ -25,3 +25,9 @@ Weapon* ItemGenerator::GenerateWeapon(int lvl)
 
 	return weapon;
 }
+
+Potion* ItemGenerator::GeneratePotion(int lvl)
+{
+	Potion* HealthPotion = new Potion(lvl);
+	return HealthPotion;
+}

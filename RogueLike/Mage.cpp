@@ -19,7 +19,7 @@ void Mage::LevelUp()
 	Damage = Damage + 3;
 }
 
-int Mage::Attac()
+int Mage::Attack()
 {
 	return this->Damage + 10 + weapon->DealDamage();
 }

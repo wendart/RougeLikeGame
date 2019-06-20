@@ -21,7 +21,7 @@ void Hunter::LevelUp()
 	Damage = Damage + 2;
 }
 
-int Hunter::Attac()
+int Hunter::Attack()
 {
 	return this->Damage + 9 + weapon->DealDamage();
 }
