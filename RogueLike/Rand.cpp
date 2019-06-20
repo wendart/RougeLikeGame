@@ -21,7 +21,7 @@ int Rand::WeaponRoll()
 		this->ininitialized = true;
 	}
 
-	return (rand() % 6);
+	return (rand() % 5);
 }
 
 int Rand::MonsterType()

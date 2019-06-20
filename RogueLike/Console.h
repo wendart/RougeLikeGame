@@ -12,7 +12,7 @@ public:
 	void PrintMenu();
 	void PrintLore();
 	void PrintPlayerStatus(Player* player);
-	int PromptForInventoryPlace(int place);
+	int PromptForInventoryPlace(int place, std::string messege);
 	std::string PromptForMenuDecision();
 	std::string PromptForName();
 	//std::string PromptForDirection();

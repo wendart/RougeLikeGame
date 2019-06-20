@@ -5,10 +5,10 @@
 enum WeaponType
 {
 	AXE,
-	SWORD,
-	STAFF,
 	BOW,
-	DAGGER
+	DAGGER,
+	STAFF,
+	SWORD,
 };
 
 class Weapon

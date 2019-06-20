@@ -52,7 +52,7 @@ void Engine::Game(Player* p1)
 		}
 
 
-		if(p1->GetLevel() == 4)
+		if(p1->GetLevel() == 6)
 		CURSED_TOTEM = true;
 	} while (CURSED_TOTEM == false);
 
@@ -93,11 +93,11 @@ void Engine::MonsterFight(Player* p1)
 			if (decision == true)
 			{
 				p1->PrintInventory();
-				console->PromptForInventoryPlace(p1->Weapons.size());
+				p1->WeaponChange(console->PromptForInventoryPlace(p1->Weapons.size(), "Pick waepon you want from inventory (number) "));
 			}
 			else
 			{
-
+				p1->PrintInventory();
 			}
 		}
 		

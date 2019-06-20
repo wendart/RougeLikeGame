@@ -24,7 +24,7 @@ protected:
 public:
 	Player();
 	virtual std::string GetName() = 0;
-	void WeaponChange(bool change, int place);
+	void WeaponChange(int place);
 	void PrintInventory();
 	int GetHealth();
 	int GetLevel();

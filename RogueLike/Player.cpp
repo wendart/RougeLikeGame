@@ -5,12 +5,12 @@ Player::Player()
 }
 
 
-void Player::WeaponChange(bool change, int place)
+void Player::WeaponChange(int place)
 {
-	if (change == true)
-	{
-
-	}
+	const int b = place;
+	Weapons.push_back(weapon);
+	weapon = Weapons.at(place);
+	Weapons.erase(Weapons.begin() + place);
 }
 
 void Player::PrintInventory()

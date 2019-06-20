@@ -7,21 +7,22 @@ WeaponType Weapon::getWeaponType()
 
 void Weapon::PrintWeaponInfo()
 {
-	switch (Type)
+	int a = Type;
+	switch (a)
 	{
-	case AXE:
+	case 0:
 		std::cout << "Axe" << std::endl << "Min Damage: " << DamageMin << std::endl << "Max Damage: " << DamageMax << std::endl;
 		break;
-	case BOW:
+	case 1:
 		std::cout << "Bow" << std::endl << "Min Damage: " << DamageMin << std::endl << "Max Damage: " << DamageMax << std::endl;
 		break;
-	case DAGGER:
+	case 2:
 		std::cout << "Dagger" << std::endl << "Min Damage: " << DamageMin << std::endl << "Max Damage: " << DamageMax << std::endl;
 		break;
-	case STAFF:
+	case 3:
 		std::cout << "Staff" << std::endl << "Min Damage: " << DamageMin << std::endl << "Max Damage: " << DamageMax << std::endl;
 		break;
-	case SWORD:
+	case 4:
 		std::cout << "Sword" << std::endl << "Min Damage: " << DamageMin << std::endl << "Max Damage: " << DamageMax << std::endl;
 		break;
 
