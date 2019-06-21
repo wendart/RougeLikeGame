@@ -1,5 +1,7 @@
 #include "Engine.h"
 
+
+
 void Engine::PrepareGame()
 {
 
@@ -40,7 +42,7 @@ void Engine::Game(Player* p1)
 	do
 	{
 		//console->PromptForDirection("Which way do you want to go \nright \nstraight \nleft\n");
-		if (RANDOM.Random100() < 30)
+		if (RANDOM.Random100() < 85)
 		{
 			system("cls");
 			console->PrintPlayerStatus(p1);
@@ -86,7 +88,7 @@ void Engine::Game(Player* p1)
 		}
 
 
-		if(p1->GetLevel() == 6)
+		if(p1->GetLevel() == 15)
 		CURSED_TOTEM = true;
 	} while (CURSED_TOTEM == false);
 
@@ -99,32 +101,37 @@ void Engine::MonsterFight(Player* p1)
 	do
 	{
 		enemy->SetHP(enemy->GetHP() - p1->Attack());
-		std::cout << "ROUND " << i << std::endl << "You've just attacked monster dealing " << p1->Attack() << " damage. Monster health " << enemy->GetHP() << std::endl;
+		std::cout << "ROUND " << i << std::endl << "You've just attacked " << enemy->PrintMonsterType() << "dealing " << p1->Attack() << " damage. Monster health " << enemy->GetHP() << std::endl;
 		if (enemy->GetHP() > 0)
 		{
 			p1->SetHealth(p1->GetHealth() - enemy->Attack());
-			std::cout << "ROUND " << i << std::endl << "You've just been attacked and taken " << enemy->Attack() << " damage. Your health " << p1->GetHealth() << std::endl;
+			std::cout << "ROUND " << i << std::endl << "You've just been attacked by " << enemy->PrintMonsterType() << "and taken " << enemy->Attack() << " damage. Your health " << p1->GetHealth() << std::endl;
 		}
 		
+
+		if (p1->GetHealth() <= 0)
+		{
+			throw GAME_OVER();
+		}
+
 		if (enemy->GetHP() <= 0)
 		{
 			p1->LevelUp();
-			Weapon* loot = generator->GenerateWeapon(p1->GetLevel());
-			std::cout << "Monster dropped: ";
-			loot->PrintWeaponInfo();
-			bool decision = console->PromptForBool("Do you want to keep this? ");
-			if (decision == true)
+			if (RANDOM.Random100() <= 60)
 			{
-				p1->Weapons.push_back(loot);
-			}
-			else
-			{
-				//delete loot;
-				//loot->~Weapon();
+				Weapon* loot = generator->GenerateWeapon(p1->GetLevel());
+				std::cout << "Monster dropped: ";
+				loot->PrintWeaponInfo();
+				bool decision = console->PromptForBool("Do you want to keep this? ");
+				if (decision == true)
+				{
+					p1->Weapons.push_back(loot);
+				}
 			}
 
 
-			decision = console->PromptForBool("Do you want to change weapon? ");
+
+			bool decision = console->PromptForBool("Do you want to change weapon? ");
 			if (decision == true)
 			{
 				p1->PrintWeapons();

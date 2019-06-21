@@ -9,6 +9,7 @@
 #include "FileWritter.h"
 #include "Monster.h"
 
+class GAME_OVER {};
 
 class Engine
 {

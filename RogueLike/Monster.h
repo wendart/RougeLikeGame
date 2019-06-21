@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "Rand.h"
+#include <iostream>
 
 enum MONSTER
 {
@@ -18,7 +19,6 @@ enum MONSTER
 	Triton,
 	Lycanthrope,
 	Vampire,
-	//https://en.wikipedia.org/wiki/Category:Dungeons_%26_Dragons_standard_creatures
 };
 
 class Monster
@@ -36,4 +36,5 @@ public:
 	int GetLevel();
 	int GetHP();
 	void SetHP(int _HP);
+	std::string PrintMonsterType();
 };
