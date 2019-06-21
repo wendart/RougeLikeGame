@@ -22,7 +22,7 @@ void Mage::LevelUp()
 
 int Mage::Attack()
 {
-	int a = this->Damage + RANDOM.BasicDamage(9, 14) + weapon->DealDamage();
+	int a = this->Damage + RANDOM.BasicDamage(7, 9) + weapon->DealDamage();
 	if (this->weapon->getWeaponType() == STAFF)
 	{
 		a = a + (0, 1 * this->weapon->GetMax());

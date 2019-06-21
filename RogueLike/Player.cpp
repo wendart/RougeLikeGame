@@ -13,11 +13,17 @@ void Player::WeaponChange(int place)
 	Weapons.erase(Weapons.begin() + place);
 }
 
+void Player::WeaponRemoval(int place)
+{
+	Weapons.erase(Weapons.begin() + place);
+}
+
 void Player::PrintWeapons()
 {
 	std::cout << "Your equipment: " << std::endl;
 	for (int i = 0; i < Weapons.size(); i++)
 	{
+		std::cout << i + 1 << ". ";
 		Weapons[i]->PrintWeaponInfo();
 	}
 }
@@ -27,6 +33,7 @@ void Player::PrintPotions()
 	std::cout << "Your potions: " << std::endl;
 	for (int i = 0; i < Potions.size(); i++)
 	{
+		std::cout << i + 1 << ". ";
 		Potions[i]->PrintPotionValue();
 	}
 }

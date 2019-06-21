@@ -55,15 +55,18 @@ void Engine::Game(Player* p1)
 			console->PrintPlayerStatus(p1);
 			std::cout << "You've chosen right path, there are no monsters nearby. Now you can peacfully magnage yoour equipment." << std::endl;
 			bool decision;
-			decision = console->PromptForBool("Do you want to change weapon? ");
-			if (decision == true)
+			if (p1->Weapons.empty() != true)
 			{
-				p1->PrintWeapons();
-				p1->WeaponChange(console->PromptForInventoryPlace(p1->Weapons.size(), "Pick waepon you want from inventory (number) "));
-			}
-			else
-			{
-				p1->PrintWeapons();
+				decision = console->PromptForBool("Do you want to change weapon? ");
+				if (decision == true)
+				{
+					p1->PrintWeapons();
+					p1->WeaponChange(console->PromptForInventoryPlace(p1->Weapons.size(), "Pick waepon you want from inventory (number) "));
+				}
+				else if (p1->Weapons.empty() != true)
+				{
+					p1->PrintWeapons();
+				}
 			}
 
 			if (p1->Potions.empty() != true)
@@ -77,20 +80,30 @@ void Engine::Game(Player* p1)
 			}
 		}
 
-		if (p1->GetLevel() % 4 == 0 && RANDOM.Random100() < 90)
+		if (p1->GetLevel() % 4 == 0 && RANDOM.Random100() < 85)
 		{
 			system("cls");
 			console->PrintPlayerStatus(p1);
 			p1->Potions.push_back(generator->GeneratePotion(p1->GetLevel()));
 			std::cout << "In dust you see a shiny object, as you grab it, it appears to be a HealthPotion" << std::endl;
-			p1->PrintPotions();
 			system("pause");
+
+			bool decision = console->PromptForBool("Do you want to drink potion?");
+			if (decision == true)
+			{
+				p1->PrintPotions();
+				p1->DrinkPotion(console->PromptForInventoryPlace(p1->Potions.size(), "Pick potion you want to drink"));
+			}
 		}
 
 
-		if(p1->GetLevel() == 15)
-		CURSED_TOTEM = true;
+		if (RANDOM.TotemSearch(p1->GetLevel()) >= 92)
+		{
+			CURSED_TOTEM = true;
+		}
 	} while (CURSED_TOTEM == false);
+
+	std::cout << "tototototootot" << std::endl;
 
 }
 
@@ -100,8 +113,9 @@ void Engine::MonsterFight(Player* p1)
 	Monster* enemy = new Monster(p1->GetLevel());
 	do
 	{
-		enemy->SetHP(enemy->GetHP() - p1->Attack());
-		std::cout << "ROUND " << i << std::endl << "You've just attacked " << enemy->PrintMonsterType() << "dealing " << p1->Attack() << " damage. Monster health " << enemy->GetHP() << std::endl;
+		int a = p1->Attack();
+		enemy->SetHP(enemy->GetHP() - a);
+		std::cout << "ROUND " << i << std::endl << "You've just attacked " << enemy->PrintMonsterType() << "dealing " << a << " damage. Monster health " << enemy->GetHP() << std::endl;
 		if (enemy->GetHP() > 0)
 		{
 			int a = p1->GetHealth();
@@ -132,28 +146,39 @@ void Engine::MonsterFight(Player* p1)
 				std::cout << "Monster dropped: ";
 				loot->PrintWeaponInfo();
 				bool decision = console->PromptForBool("Do you want to keep this? ");
-				if (decision == true)
+				if (decision == true && p1->Weapons.size() < MAX_WEAPON_COUNT)
 				{
 					p1->Weapons.push_back(loot);
+				}
+				else
+				{
+					if (console->PromptForBool("You have full backpack. Do you want to throw out something to make some free space? ") == true)
+					{
+						p1->PrintWeapons();
+						p1->WeaponRemoval(console->PromptForInventoryPlace(p1->Weapons.size(), "Pick weapon you want to throw out "));
+					}
 				}
 			}
 
 
+			if (p1->Weapons.empty() != true)
+			{
+				bool decision = console->PromptForBool("Do you want to change weapon? ");
+				if (decision == true)
+				{
+					p1->PrintWeapons();
+					p1->WeaponChange(console->PromptForInventoryPlace(p1->Weapons.size(), "Pick waepon you want from inventory (number) "));
+				}
+				else if (p1->Weapons.empty() != true)
+				{
+					p1->PrintWeapons();
+				}
+			}
 
-			bool decision = console->PromptForBool("Do you want to change weapon? ");
-			if (decision == true)
-			{
-				p1->PrintWeapons();
-				p1->WeaponChange(console->PromptForInventoryPlace(p1->Weapons.size(), "Pick waepon you want from inventory (number) "));
-			}
-			else
-			{
-				p1->PrintWeapons();
-			}
 
 			if (p1->Potions.empty() != true)
 			{
-				decision = console->PromptForBool("Do you want to drink potion?");
+				bool decision = console->PromptForBool("Do you want to drink potion?");
 					if (decision == true)
 					{
 						p1->PrintPotions();

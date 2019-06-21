@@ -10,6 +10,8 @@
 #include "Axe.h"
 #include "Potion.h"
 
+const int MAX_WEAPON_COUNT = 5;
+
 class Player
 {
 protected:
@@ -26,6 +28,7 @@ public:
 	std::string Class;
 	virtual std::string GetName() = 0;
 	void WeaponChange(int place);
+	void WeaponRemoval(int place);
 	void PrintWeapons();
 	void PrintPotions();
 	void DrinkPotion(int place);

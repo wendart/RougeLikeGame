@@ -6,24 +6,29 @@ Warrior::Warrior(std::string name)
 	Name = name;
 	Armour = 20;
 	Damage = 1;
-	HealthPoints = 40;
+	HealthPoints = 80;
 	weapon = new Dagger(1,3);
 }
 
 void Warrior::LevelUp()
 {
 	this->Level = this->Level + 1;
-	HealthPoints = HealthPoints + 8;
+	HealthPoints = HealthPoints + 10;
 	if (this->Level % 5 == 0)
 	{
-		Armour = Armour + 2;
+		Armour = Armour + 5;
 	}
 	Damage = Damage + 1;
 }
 
 int Warrior::Attack()
 {
-	return this->Damage + 8 + weapon->DealDamage();
+	int a = 0;
+	if (this->weapon->getWeaponType() == AXE)
+	{
+		a = (this->weapon->GetMin() * 0, 15);
+	}
+	return this->Damage + 5 + a + weapon->DealDamage();
 }
 
 std::string Warrior::GetName()

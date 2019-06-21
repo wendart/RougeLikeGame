@@ -34,6 +34,11 @@ int Weapon::GetMax()
 	return this->DamageMax;
 }
 
+int Weapon::GetMin()
+{
+	return this->DamageMin;
+}
+
 /*
 Weapon::~Weapon()
 {

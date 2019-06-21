@@ -15,6 +15,7 @@ public:
 	int WeaponRoll();
 	int MonsterType();
 	int MonsterLevel(int lvl);
+	int TotemSearch(int lvl);
 	int BasicDamage(int min, int max);
 };
 

@@ -24,5 +24,6 @@ public:
 	void PrintWeaponInfo();
 	virtual int DealDamage() = 0;
 	int GetMax();
+	int GetMin();
 	//~Weapon();
 };

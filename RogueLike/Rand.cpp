@@ -49,6 +49,18 @@ int Rand::MonsterLevel(int lvl)
 	return lvl + a;
 }
 
+int Rand::TotemSearch(int lvl)
+{
+	if (!this->ininitialized)
+	{
+		srand(time(NULL));
+		this->ininitialized = true;
+	}
+
+	return ((rand() % 100) + lvl);
+
+}
+
 int Rand::BasicDamage(int min, int max)
 {
 	if (!this->ininitialized)
