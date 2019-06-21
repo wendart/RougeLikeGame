@@ -40,21 +40,49 @@ void Engine::Game(Player* p1)
 	do
 	{
 		//console->PromptForDirection("Which way do you want to go \nright \nstraight \nleft\n");
-		if (RANDOM.Random100() < 90)
+		if (RANDOM.Random100() < 30)
 		{
+			system("cls");
+			console->PrintPlayerStatus(p1);
 			std::cout << "Fight" << std::endl;
 			this->MonsterFight(p1);
 		}
 		else
 		{
-			//p1.InventoryManagement();
+			system("cls");
+			console->PrintPlayerStatus(p1);
+			std::cout << "You've chosen right path, there are no monsters nearby. Now you can peacfully magnage yoour equipment." << std::endl;
+			bool decision;
+			decision = console->PromptForBool("Do you want to change weapon? ");
+			if (decision == true)
+			{
+				p1->PrintWeapons();
+				p1->WeaponChange(console->PromptForInventoryPlace(p1->Weapons.size(), "Pick waepon you want from inventory (number) "));
+			}
+			else
+			{
+				p1->PrintWeapons();
+			}
+
+			if (p1->Potions.empty() != true)
+			{
+				decision = console->PromptForBool("Do you want to drink potion?");
+				if (decision == true)
+				{
+					p1->PrintPotions();
+					p1->DrinkPotion(console->PromptForInventoryPlace(p1->Potions.size(), "Pick potion you want to drink"));
+				}
+			}
 		}
 
 		if (p1->GetLevel() % 4 == 0 && RANDOM.Random100() < 90)
 		{
+			system("cls");
+			console->PrintPlayerStatus(p1);
 			p1->Potions.push_back(generator->GeneratePotion(p1->GetLevel()));
 			std::cout << "In dust you see a shiny object, as you grab it, it appears to be a HealthPotion" << std::endl;
 			p1->PrintPotions();
+			system("pause");
 		}
 
 
@@ -91,7 +119,8 @@ void Engine::MonsterFight(Player* p1)
 			}
 			else
 			{
-				loot->~Weapon();
+				//delete loot;
+				//loot->~Weapon();
 			}
 
 
@@ -109,9 +138,10 @@ void Engine::MonsterFight(Player* p1)
 			if (p1->Potions.empty() != true)
 			{
 				decision = console->PromptForBool("Do you want to drink potion?");
-					if (decision = true)
+					if (decision == true)
 					{
 						p1->PrintPotions();
+						p1->DrinkPotion(console->PromptForInventoryPlace(p1->Potions.size(), "Pick potion you want to drink"));
 					}
 			}
 		}

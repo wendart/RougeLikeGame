@@ -29,7 +29,9 @@ void Weapon::PrintWeaponInfo()
 	}
 }
 
+/*
 Weapon::~Weapon()
 {
 	delete this;
 }
+*/

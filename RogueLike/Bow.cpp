@@ -11,3 +11,8 @@ int Bow::DealDamage()
 {
 	return RANDOM.BasicDamage(DamageMin,DamageMax);
 }
+
+Bow::~Bow()
+{
+	delete this;
+}

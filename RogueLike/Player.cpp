@@ -31,6 +31,12 @@ void Player::PrintPotions()
 	}
 }
 
+void Player::DrinkPotion(int place)
+{
+	this->HealthPoints = this->HealthPoints + Potions[place]->Heal();
+	Potions.erase(Potions.begin() + place);
+}
+
 int Player::GetHealth()
 {
 	return this->HealthPoints;

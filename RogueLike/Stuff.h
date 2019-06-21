@@ -8,5 +8,5 @@ public:
 
 	Staff(int min, int max);
 	int DealDamage();
-
+	~Staff();
 };

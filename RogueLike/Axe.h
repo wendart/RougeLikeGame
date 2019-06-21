@@ -7,5 +7,5 @@ public:
 
 	Axe(int min, int max);
 	virtual int DealDamage();
-
+	~Axe();
 };

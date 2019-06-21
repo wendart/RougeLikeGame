@@ -11,3 +11,8 @@ int Dagger::DealDamage()
 {
 	return RANDOM.BasicDamage(DamageMin,DamageMax);
 }
+
+Dagger::~Dagger()
+{
+	delete this;
+}

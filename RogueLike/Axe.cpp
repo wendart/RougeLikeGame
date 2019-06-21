@@ -19,3 +19,8 @@ int Axe::DealDamage()
 	}
 	
 }
+
+Axe::~Axe()
+{
+	delete this;
+}

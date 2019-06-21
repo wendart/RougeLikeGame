@@ -11,3 +11,8 @@ int Sword::DealDamage()
 {
 	return (DamageMax + (0.2*DamageMin));
 }
+
+Sword::~Sword()
+{
+	delete this;
+}

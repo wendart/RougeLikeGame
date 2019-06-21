@@ -27,6 +27,7 @@ public:
 	void WeaponChange(int place);
 	void PrintWeapons();
 	void PrintPotions();
+	void DrinkPotion(int place);
 	int GetHealth();
 	int GetLevel();
 	void SetHealth(int _HP);

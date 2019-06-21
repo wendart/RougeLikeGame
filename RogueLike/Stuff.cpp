@@ -18,3 +18,8 @@ int Staff::DealDamage()
 		return RANDOM.BasicDamage(DamageMin, DamageMax);
 	}
 }
+
+Staff::~Staff()
+{
+	delete this;
+}

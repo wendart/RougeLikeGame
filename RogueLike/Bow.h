@@ -7,4 +7,5 @@ public:
 
 	Bow(int min, int max);
 	virtual int DealDamage();
+	~Bow();
 };

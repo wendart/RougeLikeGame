@@ -49,14 +49,14 @@ void Console::PrintPlayerStatus(Player* player)
 	std::cout << std::endl << std::endl;
 }
 
-int Console::PromptForInventoryPlace(int place, std::string messege)
+int Console::PromptForInventoryPlace(int max, std::string messege)
 {
 	int input;
 	do
 	{
 		std::cout << messege << std::endl;
 		std::cin >> input;
-	} while (input > place || input < 0);
+	} while (input > max || input < 0);
 
 	return input-1;
 }

@@ -8,4 +8,5 @@ public:
 
 	Sword(int min, int max);
 	int DealDamage();
+	~Sword();
 };
