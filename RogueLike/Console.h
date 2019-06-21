@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "Player.h"
+#include <fstream>
 
 class Console
 {
@@ -13,6 +14,7 @@ public:
 	void PrintLore();
 	void PrintPlayerStatus(Player* player);
 	int PromptForInventoryPlace(int place, std::string messege);
+	void SaveFinalStatus(Player* player);
 	std::string PromptForMenuDecision();
 	std::string PromptForName();
 	//std::string PromptForDirection();

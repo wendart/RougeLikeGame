@@ -80,7 +80,7 @@ void Engine::Game(Player* p1)
 			}
 		}
 
-		if (p1->GetLevel() % 2 == 0 && RANDOM.Random100() < 65)
+		if (p1->GetLevel() % 2 == 0 && RANDOM.Random100() < 70)
 		{
 			system("cls");
 			console->PrintPlayerStatus(p1);
@@ -95,15 +95,16 @@ void Engine::Game(Player* p1)
 				p1->DrinkPotion(console->PromptForInventoryPlace(p1->Potions.size(), "Pick potion you want to drink"));
 			}
 		}
+		
 
-
-		if (RANDOM.TotemSearch(p1->GetLevel()) >= 92 && p1->GetLevel() >= 25)
+		if (RANDOM.TotemSearch(p1->GetLevel()) >= 90 && p1->GetLevel() >= 25)
 		{
 			CURSED_TOTEM = true;
 		}
 	} while (CURSED_TOTEM == false);
 
-	std::cout << "tototototootot" << std::endl;
+	std::cout << "End game -> it will be story here" << std::endl;
+	console->SaveFinalStatus(p1);
 
 }
 
@@ -149,6 +150,13 @@ void Engine::MonsterFight(Player* p1)
 				if (decision == true && p1->Weapons.size() < MAX_WEAPON_COUNT)
 				{
 					p1->Weapons.push_back(loot);
+				}
+				else if (decision == false)
+				{
+					if (p1->Weapons.empty() == true)
+					{
+
+					}
 				}
 				else
 				{

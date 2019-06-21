@@ -22,6 +22,7 @@ protected:
 public:
 	WeaponType getWeaponType();
 	void PrintWeaponInfo();
+	std::string ToStringWeaponInfo();
 	virtual int DealDamage() = 0;
 	int GetMax();
 	int GetMin();

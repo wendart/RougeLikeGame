@@ -29,6 +29,17 @@ void Weapon::PrintWeaponInfo()
 	}
 }
 
+std::string Weapon::ToStringWeaponInfo()
+{
+
+	std::string _weapon;
+	_weapon = "Axe Min\n Damage: " + DamageMin + _weapon + ("\nMax Damage: " + DamageMax);
+	return _weapon;
+
+
+}
+
+
 int Weapon::GetMax()
 {
 	return this->DamageMax;
