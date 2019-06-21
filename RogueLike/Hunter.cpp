@@ -2,6 +2,7 @@
 
 Hunter::Hunter(std::string name)
 {
+	this->Class = "Hunter";
 	Name = name;
 	EvasionChance = 10;
 	Armour = 0;
@@ -29,4 +30,16 @@ int Hunter::Attack()
 std::string Hunter::GetName()
 {
 	return this->Name;
+}
+
+void Hunter::TakeDamage(int _damage)
+{
+	if (RANDOM.Random100() < this->EvasionChance)
+	{
+		HealthPoints = HealthPoints;
+	}
+	else
+	{
+		HealthPoints = HealthPoints - _damage;
+	}
 }

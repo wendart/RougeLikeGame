@@ -23,6 +23,7 @@ protected:
 
 public:
 	Player();
+	std::string Class;
 	virtual std::string GetName() = 0;
 	void WeaponChange(int place);
 	void PrintWeapons();
@@ -30,7 +31,7 @@ public:
 	void DrinkPotion(int place);
 	int GetHealth();
 	int GetLevel();
-	void SetHealth(int _HP);
+	virtual void TakeDamage(int _HP) = 0;
 	virtual void LevelUp() = 0;
 	virtual int Attack() = 0;
 	Weapon* GetWeapon();

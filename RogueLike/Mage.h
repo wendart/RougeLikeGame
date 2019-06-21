@@ -10,10 +10,12 @@ private:
 protected:
 
 public:
+	std::string Class;
 	Mage(std::string name);
 	virtual void LevelUp();
 	virtual int Attack();
 	virtual std::string GetName();
+	virtual void TakeDamage(int _damage);
 
 
 };

@@ -2,8 +2,9 @@
 
 Warrior::Warrior(std::string name)
 {
+	this->Class = "Warrior";
 	Name = name;
-	Armour = 10;
+	Armour = 20;
 	Damage = 1;
 	HealthPoints = 40;
 	weapon = new Dagger(1,3);
@@ -28,4 +29,12 @@ int Warrior::Attack()
 std::string Warrior::GetName()
 {
 	return this->Name;
+}
+void Warrior::TakeDamage(int _damage)
+{
+	float a = (100 - this->Armour);
+	float b = a / 100;
+	float c = _damage * b;
+	int d = (int)c;
+	this->HealthPoints = HealthPoints - d;
 }

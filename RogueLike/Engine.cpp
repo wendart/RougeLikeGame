@@ -104,8 +104,17 @@ void Engine::MonsterFight(Player* p1)
 		std::cout << "ROUND " << i << std::endl << "You've just attacked " << enemy->PrintMonsterType() << "dealing " << p1->Attack() << " damage. Monster health " << enemy->GetHP() << std::endl;
 		if (enemy->GetHP() > 0)
 		{
-			p1->SetHealth(p1->GetHealth() - enemy->Attack());
-			std::cout << "ROUND " << i << std::endl << "You've just been attacked by " << enemy->PrintMonsterType() << "and taken " << enemy->Attack() << " damage. Your health " << p1->GetHealth() << std::endl;
+			int a = p1->GetHealth();
+			p1->TakeDamage(enemy->Attack());
+			std::cout << "ROUND " << i << std::endl << "You've just been attacked by " << enemy->PrintMonsterType();
+			if (p1->GetHealth() == a)
+			{
+				std::cout << "and performed susuccessfuln doge. Your health " << p1->GetHealth() << std::endl;
+			}
+			else
+			{
+				std::cout << "Enemy strikes with " << enemy->Attack() << " damage. Your health " << p1->GetHealth() << std::endl;
+			}
 		}
 		
 

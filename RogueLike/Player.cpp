@@ -46,15 +46,7 @@ int Player::GetLevel()
 {
 	return this->Level;
 }
-void Player::SetHealth(int _HP)
-{
-	HealthPoints = _HP;
-}
 
-int Player::Attack()
-{
-	return 0;
-}
 
 Weapon* Player::GetWeapon()
 {

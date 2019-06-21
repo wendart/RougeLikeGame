@@ -12,8 +12,6 @@ int main()
 	}
 	catch (GAME_OVER &e)
 	{
-		
-		//system("cls");
 		std::cout << "You've been killed, your body will never be found." << std::endl;
 	}
 

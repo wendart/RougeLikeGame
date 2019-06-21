@@ -29,6 +29,11 @@ void Weapon::PrintWeaponInfo()
 	}
 }
 
+int Weapon::GetMax()
+{
+	return this->DamageMax;
+}
+
 /*
 Weapon::~Weapon()
 {

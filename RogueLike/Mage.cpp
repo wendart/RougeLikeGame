@@ -2,6 +2,7 @@
 
 Mage::Mage(std::string name)
 {
+	this->Class = "Mage";
 	Name = name;
 	Damage = 3;
 	HealthPoints = 20;
@@ -21,10 +22,21 @@ void Mage::LevelUp()
 
 int Mage::Attack()
 {
-	return this->Damage + 10 + weapon->DealDamage();
+	int a = this->Damage + RANDOM.BasicDamage(9, 14) + weapon->DealDamage();
+	if (this->weapon->getWeaponType() == STAFF)
+	{
+		a = a + (0, 1 * this->weapon->GetMax());
+	}
+	return a;
 }
 
 std::string Mage::GetName()
 {
 	return this->Name;
 }
+
+void Mage::TakeDamage(int _damage)
+{
+	HealthPoints = HealthPoints - _damage;
+}
+
