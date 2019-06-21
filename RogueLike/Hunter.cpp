@@ -13,23 +13,49 @@ Hunter::Hunter(std::string name)
 
 void Hunter::LevelUp()
 {
-	this->Level = this->Level + 1;
-	HealthPoints = HealthPoints + 6;
-	if (this->Level % 5 == 0)
+	if (this->Level < 10)
 	{
-		EvasionChance = EvasionChance + 1;
+		this->Level = this->Level + 1;
+		HealthPoints = HealthPoints + 6;
+		if (this->Level % 5 == 0)
+		{
+			EvasionChance = EvasionChance + 1;
+		}
+		Damage = Damage + 2;
 	}
-	Damage = Damage + 2;
+	else
+	{
+		this->Level = this->Level + 1;
+		HealthPoints = HealthPoints + 12;
+		if (this->Level % 5 == 0)
+		{
+			EvasionChance = EvasionChance + 3;
+		}
+		Damage = Damage + 2;
+	}
+
 }
 
 int Hunter::Attack()
 {
-	int a = 0;
-	if (this->weapon->getWeaponType() == BOW || RANDOM.Random100() <= 10)
+	if (this->Level < 10)
 	{
-		a = weapon->GetMin();
+		int a = 0;
+		if (this->weapon->getWeaponType() == BOW || RANDOM.Random100() <= 10)
+		{
+			a = weapon->GetMin();
+		}
+		return this->Damage + 8 + a + weapon->DealDamage();
 	}
-	return this->Damage + 8 + a + weapon->DealDamage();
+	else
+	{
+		int a = 0;
+		if (this->weapon->getWeaponType() == BOW || RANDOM.Random100() <= 10)
+		{
+			a = weapon->GetMin();
+		}
+		return (int) ((this->Damage + 8 + a + weapon->DealDamage()) * 0.75);
+	}
 }
 
 std::string Hunter::GetName()

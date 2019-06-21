@@ -12,23 +12,50 @@ Warrior::Warrior(std::string name)
 
 void Warrior::LevelUp()
 {
-	this->Level = this->Level + 1;
-	HealthPoints = HealthPoints + 10;
-	if (this->Level % 5 == 0)
+	if (this->Level < 10)
 	{
-		Armour = Armour + 5;
+		this->Level = this->Level + 1;
+		HealthPoints = HealthPoints + 10;
+		if (this->Level % 5 == 0)
+		{
+			Armour = Armour + 5;
+		}
+		Damage = Damage + 2;
 	}
-	Damage = Damage + 1;
+	else
+	{
+		this->Level = this->Level + 1;
+		HealthPoints = HealthPoints + 18;
+		if (this->Level % 5 == 0)
+		{
+			Armour = Armour + 8;
+		}
+		Damage = Damage + 3;
+	}
+
 }
 
 int Warrior::Attack()
 {
-	int a = 0;
-	if (this->weapon->getWeaponType() == AXE)
+	if (this->Level < 10)
 	{
-		a = (this->weapon->GetMin() * 0, 15);
+		int a = 0;
+		if (this->weapon->getWeaponType() == AXE)
+		{
+			a = (this->weapon->GetMin() * 0, 15);
+		}
+		return this->Damage + 5 + a + weapon->DealDamage();
 	}
-	return this->Damage + 5 + a + weapon->DealDamage();
+	else
+	{
+		int a = 0;
+		if (this->weapon->getWeaponType() == AXE)
+		{
+			a = (this->weapon->GetMin() * 0, 15);
+		}
+		return (int) ((this->Damage + 5 + a + weapon->DealDamage()));
+	}
+
 }
 
 std::string Warrior::GetName()

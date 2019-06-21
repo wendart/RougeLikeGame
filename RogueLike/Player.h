@@ -10,7 +10,7 @@
 #include "Axe.h"
 #include "Potion.h"
 
-const int MAX_WEAPON_COUNT = 5;
+const int MAX_WEAPON_COUNT = 2;
 
 class Player
 {

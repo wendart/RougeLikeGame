@@ -3,20 +3,55 @@
 Monster::Monster(int lvl) :
 	Type(MONSTER(RANDOM.MonsterType())), Level(RANDOM.MonsterLevel(lvl))
 {
-	this->Armour = this->Level + 1;
-	this->Health = this->Level + 40;
-	if (this->Level * 3 == 0)
+	if (lvl < 8)
 	{
-		this->Damage = 8;
+		this->Health = this->Level + 40;
+		if (this->Level * 3 == 0)
+		{
+			this->Damage = 8;
+		}
+		else if (this->Level < 0)
+		{
+			this->Damage = ((this->Level * 3) * -1);
+		}
+		else
+		{
+			this->Damage = (this->Level * RANDOM.BasicDamage(1, 3));
+		}
 	}
-	else if(this->Level < 0)
+	else if (lvl < 15)
 	{
-		this->Damage = ((this->Level * 3) * -1);
+		this->Health = this->Level + 80;
+		if (this->Level * 3 == 0)
+		{
+			this->Damage = 8;
+		}
+		else if (this->Level < 0)
+		{
+			this->Damage = ((this->Level * 3) * -1);
+		}
+		else
+		{
+			this->Damage = (this->Level * RANDOM.BasicDamage(1, 2));
+		}
 	}
 	else
 	{
-		this->Damage = (this->Level * 3);
+		this->Health = this->Level + 100;
+		if (this->Level * 3 == 0)
+		{
+			this->Damage = 8;
+		}
+		else if (this->Level < 0)
+		{
+			this->Damage = ((this->Level * 3) * -1);
+		}
+		else
+		{
+			this->Damage = (int)(this->Level * 1,5);
+		}
 	}
+
 	
 }
 

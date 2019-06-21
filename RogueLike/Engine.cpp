@@ -42,7 +42,7 @@ void Engine::Game(Player* p1)
 	do
 	{
 		//console->PromptForDirection("Which way do you want to go \nright \nstraight \nleft\n");
-		if (RANDOM.Random100() < 85)
+		if (RANDOM.Random100() < 90)
 		{
 			system("cls");
 			console->PrintPlayerStatus(p1);
@@ -80,7 +80,7 @@ void Engine::Game(Player* p1)
 			}
 		}
 
-		if (p1->GetLevel() % 4 == 0 && RANDOM.Random100() < 85)
+		if (p1->GetLevel() % 2 == 0 && RANDOM.Random100() < 65)
 		{
 			system("cls");
 			console->PrintPlayerStatus(p1);
@@ -97,7 +97,7 @@ void Engine::Game(Player* p1)
 		}
 
 
-		if (RANDOM.TotemSearch(p1->GetLevel()) >= 92)
+		if (RANDOM.TotemSearch(p1->GetLevel()) >= 92 && p1->GetLevel() >= 25)
 		{
 			CURSED_TOTEM = true;
 		}
@@ -140,7 +140,7 @@ void Engine::MonsterFight(Player* p1)
 		if (enemy->GetHP() <= 0)
 		{
 			p1->LevelUp();
-			if (RANDOM.Random100() <= 60)
+			if (RANDOM.Random100() <= 200)
 			{
 				Weapon* loot = generator->GenerateWeapon(p1->GetLevel());
 				std::cout << "Monster dropped: ";
@@ -156,6 +156,7 @@ void Engine::MonsterFight(Player* p1)
 					{
 						p1->PrintWeapons();
 						p1->WeaponRemoval(console->PromptForInventoryPlace(p1->Weapons.size(), "Pick weapon you want to throw out "));
+						p1->Weapons.push_back(loot);
 					}
 				}
 			}
