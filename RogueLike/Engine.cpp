@@ -16,26 +16,33 @@ void Engine::Start()
 void Engine::PrepareGame()
 {
 	this->console->PrintMenu();
-	decision = console->PromptForMenuDecision();
+	std::string characterClass = console->PromptForMenuDecision();
 
-	if (decision == "exit")
+	if (characterClass == "exit")
 	{
 		exit(0);
+		return;
 	}
-	else if(decision == "Hunter")
+
+	std::cout << "Choose your name: " << std::endl;
+	std::string name = console->PromptForName();
+
+	CreatePlayerWithName(characterClass, name);
+}
+
+void Engine::CreatePlayerWithName(std::string characterClass, std::string name)
+{
+	if (characterClass == "Hunter")
 	{
-		std::cout << "Choose your name: " << std::endl;
-		player = new Hunter (console->PromptForName());
+		player = new Hunter(name);
 	}
-	else if (decision == "Mage")
+	else if (characterClass == "Mage")
 	{
-		std::cout << "Choose your name: " << std::endl;
-		player = new Mage(console->PromptForName());
+		player = new Mage(name);
 	}
-	else if (decision == "Warrior")
+	else if (characterClass == "Warrior")
 	{
-		std::cout << "Choose your name: " << std::endl;
-		player = new Warrior(console->PromptForName());
+		player = new Warrior(name);
 	}
 }
 
@@ -49,60 +56,101 @@ void Engine::Game()
 	do
 	{
 		//console->PromptForDirection("Which way do you want to go \nright \nstraight \nleft\n");
-		if (RANDOM.Random100() < 90)
+		if (IsMonsterFound() == true)
 		{
-			system("cls");
-			console->PrintPlayerStatus(player);
-			std::cout << "Fight" << std::endl;
-			this->MonsterFight();
+			ActionMonsterFight();
 		}
 		else
 		{
-			system("cls");
-			console->PrintPlayerStatus(player);
-			std::cout << "You've chosen right path, there are no monsters nearby. Now you can peacfully magnage yoour equipment." << std::endl;
-			bool decision;
-			if (player->Weapons.empty() != true)
-			{
-				decision = console->PromptForBool("Do you want to change weapon? ");
-				if (decision == true)
-				{
-					player->PrintWeapons();
-					player->WeaponChange(console->PromptForInventoryPlace(player->Weapons.size(), "Pick waepon you want from inventory (number) "));
-				}
-				else if (player->Weapons.empty() != true)
-				{
-					player->PrintWeapons();
-				}
-			}
-
-			if (player->Potions.empty() != true)
-			{
-				AskForPotionDrinkage(player);
-			}
+			PeacefulPlace();
 		}
 
-		if (player->GetLevel() % 2 == 0 && RANDOM.Random100() < 70)
+		if (IsPotionFound() == true)
 		{
-			system("cls");
-			console->PrintPlayerStatus(player);
-			player->Potions.push_back(generator->GeneratePotion(player->GetLevel()));
-			std::cout << "In dust you see a shiny object, as you grab it, it appears to be a HealthPotion" << std::endl;
-			system("pause");
-
-			AskForPotionDrinkage(player);
+			PotionFound();
 		}
-		
 
-		if (RANDOM.TotemSearch(player->GetLevel()) >= 90 && player->GetLevel() >= 25)
-		{
-			CURSED_TOTEM = true;
-		}
-	} while (CURSED_TOTEM == false);
+		EvaluateEndGameCondition();
+	} while (IsGameFinished() == false);
 
 	std::cout << "End game -> it will be story here" << std::endl;
 	console->SaveFinalStatus(player);
 
+}
+
+void Engine::ActionMonsterFight()
+{
+	system("cls");
+	console->PrintPlayerStatus(player);
+	std::cout << "Fight" << std::endl;
+	this->MonsterFight();
+}
+
+void Engine::PotionFound()
+{
+	system("cls");
+	console->PrintPlayerStatus(player);
+	player->Potions.push_back(generator->GeneratePotion(player->GetLevel()));
+	std::cout << "In dust you see a shiny object, as you grab it, it appears to be a HealthPotion" << std::endl;
+	system("pause");
+
+	AskForPotionDrinkage();
+}
+
+bool Engine::IsGameFinished()
+{
+	if (CURSED_TOTEM == true)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void Engine::EvaluateEndGameCondition()
+{
+	if (RANDOM.TotemSearch(player->GetLevel()) >= 90 && player->GetLevel() >= 25)
+	{
+		CURSED_TOTEM = true;
+	}
+}
+
+bool Engine::IsPotionFound()
+{
+	return player->GetLevel() % 2 == 0 && RANDOM.Random100() < 70;
+}
+
+void Engine::PeacefulPlace()
+{
+	system("cls");
+	console->PrintPlayerStatus(player);
+	std::cout << "You've chosen right path, there are no monsters nearby. Now you can peacfully magnage yoour equipment." << std::endl;
+	bool decision;
+	if (player->Weapons.empty() != true)
+	{
+		decision = console->PromptForBool("Do you want to change weapon? ");
+		if (decision == true)
+		{
+			player->PrintWeapons();
+			player->WeaponChange(console->PromptForInventoryPlace(player->Weapons.size(), "Pick waepon you want from inventory (number) "));
+		}
+		else if (player->Weapons.empty() != true)
+		{
+			player->PrintWeapons();
+		}
+	}
+
+	if (player->Potions.empty() != true)
+	{
+		AskForPotionDrinkage();
+	}
+}
+
+bool Engine::IsMonsterFound()
+{
+	return RANDOM.Random100() < 90;
 }
 
 void Engine::MonsterFight()
@@ -184,10 +232,9 @@ void Engine::MonsterFight()
 
 			if (player->Potions.empty() != true)
 			{
-				AskForPotionDrinkage(player);
+				AskForPotionDrinkage();
 			}
 		}
-		
 
 		system("pause");
 		system("cls");
@@ -197,7 +244,7 @@ void Engine::MonsterFight()
 	} while (player->GetHealth() > 0 && enemy->GetHP() > 0);
 }
 
-void Engine::AskForPotionDrinkage(Player* player)
+void Engine::AskForPotionDrinkage()
 {
 	bool decision = console->PromptForBool("Do you want to drink potion?");
 	if (decision == true)

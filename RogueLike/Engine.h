@@ -15,18 +15,23 @@ class Engine
 {
 private:
 	bool CURSED_TOTEM = false;
-	std::string decision;
 	Player* player = NULL;
 	Console* console = new Console();
 	ItemGenerator* generator = new ItemGenerator();
 	FileWriter* writter = new FileWriter();
 
+	void MonsterFight();
+	void PrepareGame();
+	void CreatePlayerWithName(std::string characterClass, std::string name);
+	void AskForPotionDrinkage();
+	void Game();
+
+	bool IsPotionFound();
+
+	void PeacefulPlace();
+
+	bool IsMonsterFound();
+
 public:
 	void Start();
-	void PrepareGame();
-	virtual void Game();
-	void MonsterFight();
-
-	void AskForPotionDrinkage(Player* p1);
-
 };
