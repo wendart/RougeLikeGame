@@ -4,6 +4,23 @@ Player::Player()
 {
 }
 
+Player::~Player()
+{
+	if (weapon != NULL)
+	{
+		delete this->weapon;
+	}
+
+	for (int i = 0; i < this->Weapons.size(); i++)
+	{
+		delete this->Weapons[i];
+	}
+
+	for (int i = 0; i < this->Potions.size(); i++)
+	{
+		delete this->Potions[i];
+	}
+}
 
 void Player::WeaponChange(int place)
 {
@@ -15,7 +32,10 @@ void Player::WeaponChange(int place)
 
 void Player::WeaponRemoval(int place)
 {
+	Weapon* weaponToRemove = Weapons.at(place);
 	Weapons.erase(Weapons.begin() + place);
+
+	delete weaponToRemove;
 }
 
 void Player::PrintWeapons()
@@ -58,4 +78,9 @@ int Player::GetLevel()
 Weapon* Player::GetWeapon()
 {
 	return weapon;
+}
+
+bool Player::IsDead()
+{
+	return GetHealth() <= 0;
 }

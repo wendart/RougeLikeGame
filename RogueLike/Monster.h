@@ -37,4 +37,5 @@ public:
 	int GetHP();
 	void SetHP(int _HP);
 	std::string PrintMonsterType();
+	bool IsDead();
 };

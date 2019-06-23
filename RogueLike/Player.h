@@ -25,6 +25,7 @@ protected:
 
 public:
 	Player();
+	~Player();
 	std::string Class;
 	virtual std::string GetName() = 0;
 	void WeaponChange(int place);
@@ -38,6 +39,7 @@ public:
 	virtual void LevelUp() = 0;
 	virtual int Attack() = 0;
 	Weapon* GetWeapon();
+	bool IsDead();
 
 	std::vector <Weapon*> Weapons;
 	std::vector <Potion*> Potions;

@@ -95,3 +95,8 @@ std::string Monster::PrintMonsterType()
 	case Vampire:		return "Vampire "; break;
 	}
 }
+
+bool Monster::IsDead()
+{
+	return GetHP() <= 0;
+}

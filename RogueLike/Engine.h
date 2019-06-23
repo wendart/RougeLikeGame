@@ -21,17 +21,23 @@ private:
 	FileWriter* writter = new FileWriter();
 
 	void MonsterFight();
+	void ChangeWeapon();
+	void ObtainLoot();
+	void FightPerformRound(Monster* enemy, int roundNumber);
 	void PrepareGame();
 	void CreatePlayerWithName(std::string characterClass, std::string name);
 	void AskForPotionDrinkage();
 	void Game();
-
+	void ActionMonsterFight();
+	void PotionFound();
+	bool IsGameFinished();
+	void EvaluateEndGameCondition();
 	bool IsPotionFound();
-
 	void PeacefulPlace();
-
 	bool IsMonsterFound();
+	bool RandomChance(double chance);
 
 public:
 	void Start();
+	~Engine();
 };

@@ -1,5 +1,9 @@
 #include "Engine.h"
 
+const double FIGHT_CHANCE = 0.90;
+const double POTION_CHANCE = 0.60;
+const double LOOT_CHANCE = 1;
+
 void Engine::Start()
 {
 	try 
@@ -11,6 +15,18 @@ void Engine::Start()
 	{
 		std::cout << "You've been killed, your body will never be found." << std::endl;
 	}
+}
+
+Engine::~Engine()
+{
+	if (player != NULL)
+	{
+		delete this->player;
+	}
+	
+	delete this->console;
+	delete this->generator;
+	delete this->writter;
 }
 
 void Engine::PrepareGame()
@@ -74,8 +90,7 @@ void Engine::Game()
 	} while (IsGameFinished() == false);
 
 	std::cout << "End game -> it will be story here" << std::endl;
-	console->SaveFinalStatus(player);
-
+	writter->SaveFinalStatus(player);
 }
 
 void Engine::ActionMonsterFight()
@@ -119,7 +134,7 @@ void Engine::EvaluateEndGameCondition()
 
 bool Engine::IsPotionFound()
 {
-	return player->GetLevel() % 2 == 0 && RANDOM.Random100() < 70;
+	return player->GetLevel() % 2 == 0 && RandomChance(POTION_CHANCE);
 }
 
 void Engine::PeacefulPlace()
@@ -127,125 +142,132 @@ void Engine::PeacefulPlace()
 	system("cls");
 	console->PrintPlayerStatus(player);
 	std::cout << "You've chosen right path, there are no monsters nearby. Now you can peacfully magnage yoour equipment." << std::endl;
-	bool decision;
-	if (player->Weapons.empty() != true)
-	{
-		decision = console->PromptForBool("Do you want to change weapon? ");
-		if (decision == true)
-		{
-			player->PrintWeapons();
-			player->WeaponChange(console->PromptForInventoryPlace(player->Weapons.size(), "Pick waepon you want from inventory (number) "));
-		}
-		else if (player->Weapons.empty() != true)
-		{
-			player->PrintWeapons();
-		}
-	}
 
-	if (player->Potions.empty() != true)
-	{
-		AskForPotionDrinkage();
-	}
+	ChangeWeapon();
+	AskForPotionDrinkage();
 }
 
 bool Engine::IsMonsterFound()
 {
-	return RANDOM.Random100() < 90;
+	return RandomChance(FIGHT_CHANCE);
+}
+
+bool Engine::RandomChance(double chance)
+{
+	double result = RANDOM.Random100() / double(100);
+	return result <= chance;
 }
 
 void Engine::MonsterFight()
 {
-	int i = 1;
+	int roundNumber = 1;
 	Monster* enemy = new Monster(player->GetLevel());
 	do
 	{
-		int a = player->Attack();
-		enemy->SetHP(enemy->GetHP() - a);
-		std::cout << "ROUND " << i << std::endl << "You've just attacked " << enemy->PrintMonsterType() << "dealing " << a << " damage. Monster health " << enemy->GetHP() << std::endl;
-		if (enemy->GetHP() > 0)
-		{
-			int a = player->GetHealth();
-			player->TakeDamage(enemy->Attack());
-			std::cout << "ROUND " << i << std::endl << "You've just been attacked by " << enemy->PrintMonsterType();
-			if (player->GetHealth() == a)
-			{
-				std::cout << "and performed susuccessfuln doge. Your health " << player->GetHealth() << std::endl;
-			}
-			else
-			{
-				std::cout << "Enemy strikes with " << enemy->Attack() << " damage. Your health " << player->GetHealth() << std::endl;
-			}
-		}
-		
+		FightPerformRound(enemy, roundNumber);
 
-		if (player->GetHealth() <= 0)
+		if (player->IsDead() == true)
 		{
 			throw GAME_OVER();
 		}
 
-		if (enemy->GetHP() <= 0)
+		if (enemy->IsDead() == true)
 		{
 			player->LevelUp();
-			if (RANDOM.Random100() <= 200)
-			{
-				Weapon* loot = generator->GenerateWeapon(player->GetLevel());
-				std::cout << "Monster dropped: ";
-				loot->PrintWeaponInfo();
-				bool decision = console->PromptForBool("Do you want to keep this? ");
-				if (decision == true && player->Weapons.size() < MAX_WEAPON_COUNT)
-				{
-					player->Weapons.push_back(loot);
-				}
-				else if (decision == false)
-				{
-					if (player->Weapons.empty() == true)
-					{
-
-					}
-				}
-				else
-				{
-					if (console->PromptForBool("You have full backpack. Do you want to throw out something to make some free space? ") == true)
-					{
-						player->PrintWeapons();
-						player->WeaponRemoval(console->PromptForInventoryPlace(player->Weapons.size(), "Pick weapon you want to throw out "));
-						player->Weapons.push_back(loot);
-					}
-				}
-			}
-
-
-			if (player->Weapons.empty() != true)
-			{
-				bool decision = console->PromptForBool("Do you want to change weapon? ");
-				if (decision == true)
-				{
-					player->PrintWeapons();
-					player->WeaponChange(console->PromptForInventoryPlace(player->Weapons.size(), "Pick weapon you want from inventory (number) "));
-				}
-				else if (player->Weapons.empty() != true)
-				{
-					player->PrintWeapons();
-				}
-			}
-
-
-			if (player->Potions.empty() != true)
-			{
-				AskForPotionDrinkage();
-			}
+			ObtainLoot();
+			ChangeWeapon();
+			AskForPotionDrinkage();
 		}
 
 		system("pause");
 		system("cls");
 		console->PrintPlayerStatus(player);
-		i++;
+		roundNumber++;
 		
-	} while (player->GetHealth() > 0 && enemy->GetHP() > 0);
+	} while (player->IsDead() == false && enemy->IsDead() == false);
+}
+
+void Engine::ChangeWeapon()
+{
+	if (player->Weapons.empty() == true)
+	{
+		return;
+	}
+
+	bool decision = console->PromptForBool("Do you want to change weapon? ");
+	if (decision == true)
+	{
+		player->PrintWeapons();
+		player->WeaponChange(console->PromptForInventoryPlace(player->Weapons.size(), "Pick weapon you want from inventory (number) "));
+	}
+	else if (player->Weapons.empty() != true)
+	{
+		player->PrintWeapons();
+	}
+}
+
+void Engine::ObtainLoot()
+{
+	if (RandomChance(LOOT_CHANCE) == false)
+	{
+		return;
+	}
+
+	Weapon* loot = generator->GenerateWeapon(player->GetLevel());
+	std::cout << "Monster dropped: ";
+	loot->PrintWeaponInfo();
+
+	bool decision = console->PromptForBool("Do you want to keep this? ");
+
+	if (decision == false)
+	{
+		return;
+	}
+
+	if (player->Weapons.size() >= MAX_WEAPON_COUNT)
+	{
+		if (console->PromptForBool("You have full backpack. Do you want to throw out something to make some free space? ") == true)
+		{
+			player->PrintWeapons();
+			player->WeaponRemoval(console->PromptForInventoryPlace(player->Weapons.size(), "Pick weapon you want to throw out "));
+			player->Weapons.push_back(loot);
+		}
+	}
+	else
+	{
+		player->Weapons.push_back(loot);
+	}
+}
+
+void Engine::FightPerformRound(Monster* enemy, int roundNumber)
+{
+	int a = player->Attack();
+	enemy->SetHP(enemy->GetHP() - a);
+	std::cout << "ROUND " << roundNumber << std::endl << "You've just attacked " << enemy->PrintMonsterType() << "dealing " << a << " damage. Monster health " << enemy->GetHP() << std::endl;
+	if (enemy->IsDead() == false)
+	{
+		int initialPlayerHP = player->GetHealth();
+		player->TakeDamage(enemy->Attack());
+		std::cout << "You've just been attacked by " << enemy->PrintMonsterType();
+
+		if (player->GetHealth() == initialPlayerHP)
+		{
+			std::cout << "and performed susuccessfuln dodge. Your health " << player->GetHealth() << std::endl;
+		}
+		else
+		{
+			std::cout << "Enemy strikes with " << enemy->Attack() << " damage. Your health " << player->GetHealth() << std::endl;
+		}
+	}
 }
 
 void Engine::AskForPotionDrinkage()
 {
+	if (player->Potions.empty() == true)
+	{
+		return;
+	}
+
 	bool decision = console->PromptForBool("Do you want to drink potion?");
 	if (decision == true)
 	{
@@ -253,3 +275,4 @@ void Engine::AskForPotionDrinkage()
 		player->DrinkPotion(console->PromptForInventoryPlace(player->Potions.size(), "Pick potion you want to drink"));
 	}
 }
+
