@@ -9,22 +9,20 @@ void Console::Prompt(std::string msg, std::string* var)
 
 bool Console::PromptForBool(std::string messege)
 {
+	std::string input;
+
+	do
 	{
-		std::string input;
+		Prompt(messege, &input);
+	} while (input != "yes" && input != "no");
 
-		do
-		{
-			Prompt(messege, &input);
-		} while (input != "yes" && input != "no");
-
-		if (input == "yes")
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+	if (input == "yes")
+	{
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
 
@@ -51,14 +49,25 @@ void Console::PrintPlayerStatus(Player* player)
 
 int Console::PromptForInventoryPlace(int max, std::string messege)
 {
-	int input;
+	std::string input;
+	int place;
+
 	do
 	{
-		std::cout << messege << std::endl;
-		std::cin >> input;
-	} while (input > max || input < 0);
+		Prompt(messege, &input);
 
-	return input-1;
+		try 
+		{
+			place = stoi(input);
+		}
+		catch (std::invalid_argument &e) 
+		{
+			place = -1;
+		};
+
+	} while (place > max || place < 0);
+
+	return place - 1;
 }
 
 void Console::SaveFinalStatus(Player* player)
@@ -147,5 +156,4 @@ void Console::PromptForDirection(std::string mess)
 	{
 		Prompt(mess, &input);
 	} while (input != "left" && input != "right" && input != "straight");
-	
 }
